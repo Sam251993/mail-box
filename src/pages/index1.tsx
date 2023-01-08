@@ -1,5 +1,6 @@
 import { type NextPage } from "next";
 import { signIn, signOut, useSession } from "next-auth/react";
+import MainGrid from "../layouts/grid/grid";
 
 import { api } from "../utils/api";
 
@@ -9,7 +10,7 @@ const Home: NextPage = () => {
   return (
     <>
       {!sessionData ?
-        <AuthShowcase /> :
+        <MainGrid />  :
         <div>
           <button
             className="rounded-full bg-black px-10 py-3 font-semibold text-white no-underline transition hover:bg-black/30"

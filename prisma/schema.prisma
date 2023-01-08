@@ -45,7 +45,8 @@ model Session {
 model User {
     id            String    @id @default(cuid()) @map("_id")
     name          String?
-    email         String?   @unique
+    password      String?
+    email         String   @unique
     emailVerified DateTime?
     image         String?
     accounts      Account[]
@@ -88,10 +89,15 @@ enum TaskStatus {
     DONE
 }
 
-// model TaskComment {
-//     id          String   @id @default(cuid()) @map("_id")
-//     Task        Task?    @relation(fields: [taskId], references: [id])
-//     taskId      String?
-//     text        String
-//     createdDate DateTime
-// }
+model Comment {
+    id                  String      @id @default(cuid()) @map("_id")
+    email               String      
+    from_email          String
+    to_id               String  
+    to_email            String
+    title               String
+    text                String
+    date                DateTime
+    answered_to_id      String      
+    conversation_id     String?  
+}
