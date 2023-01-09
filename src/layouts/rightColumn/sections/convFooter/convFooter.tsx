@@ -4,14 +4,15 @@ import { Button, Paper, TextField } from '@mui/material';
 import styles from './convFooter.module.scss';
 import SendIcon from '@mui/icons-material/Send';
 import { useStore } from '../../../../store/store';
-import shallow from 'zustand/shallow'; 
-import { setComment } from '../../../../utils/api-helpers';
-import { Message } from '../../utils/interfaces'; 
+import shallow from 'zustand/shallow';
+import type { Comment } from '@prisma/client';
+import { api } from '../../../../utils/api';
 
 // --- Component Props Interface ---
 type ConversationsProps = Partial<{
   conversation: 'blankConversation',
-  onClose: (conversation: any) => any, children?: any
+  onClose: (conversation: string) => void,
+  children?: JSX.Element
 }>;
 
 export default function ConvFooter({ conversation }: ConversationsProps): JSX.Element  {
@@ -29,7 +30,7 @@ export default function ConvFooter({ conversation }: ConversationsProps): JSX.El
     shallow
   );
 
-  const [selectedMessage, setSelectedMessage] = useState<Message>();
+  const [selectedMessage] = useState<Comment>();
   const [mes, setMes] = useState(''); 
   const [title, setTitle] = useState('Untitled'); 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -40,25 +41,28 @@ export default function ConvFooter({ conversation }: ConversationsProps): JSX.El
     }
   }
 
+  const postMessage = api.comment.postMessage.useMutation({
+    onSuccess: (data) => {
+      setMes('');
+      setTitle('');
+      data && setMessage(data, conversation);
+    }
+  });
+
   const sendMessage = async () => {
     const msg = {
       text: mes,
-      answered_to_id: selectedMessage?._id,
+      answered_to_id: selectedMessage?.id,
       from_email: activeUser.email,
-      from_id: activeUser._id,
+      from_id: activeUser.id,
       email: activeConversation.email,
       title: title,
       date: new Date(),
       to_email: activeConversation.email,
-      to_id: activeConversation._id
+      to_id: activeConversation.id
     };
     if (mes) {
-      const message = await setComment(msg);
-      setMes('');
-      setTitle('');
-      if (message) {
-        setMessage(message, conversation);
-      }
+      postMessage.mutate(msg);
     }
   }
   useEffect(() => {

@@ -1,5 +1,4 @@
-import type { GetServerSideProps, InferGetStaticPropsType } from "next";
-import { useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import shallow from "zustand/shallow";
 import MainGrid from "../layouts/grid/grid";
@@ -9,31 +8,38 @@ import { api } from "../utils/api";
 export default function Layout() {
   const router = useRouter();
   const { data: sessionData } = useSession();
+  const { setUsers } = useStore((store) => {
+    return {
+      setUsers: store.setUsers,
+    };
+  }, shallow);
 
-  // if(router.query?.slug?.[0] === 'inbox') {
-    const { data } = api.example.getUsers.useQuery(
-      undefined, // no input
-      { enabled: sessionData?.user !== undefined && router.query?.slug?.[0] === 'inbox' },
-    );
-    console.log(data, 'data trpc');
-    
-    const { users, setUsers } = useStore(
-      (store) => {
-        return {
-          users: store.users,
-          setUsers: store.setUsers
-        }
-      },
-      shallow
-    );
-    if(data) {
-      setUsers(data);
+  api.user.getUsers.useQuery(
+    undefined,
+    {
+      enabled: sessionData?.user !== undefined && router.query?.slug?.[0] === "inbox",
+      onSuccess: (data) => {
+        setUsers(data);
+      }
     }
-  // }
+  );
 
   return (
-    <MainGrid />
-  )
+    <>
+      {sessionData ? (
+        <MainGrid />
+      ) : (
+        <div>
+          <button
+            className="rounded-full bg-black px-10 py-3 font-semibold text-white no-underline transition hover:bg-black/30"
+            onClick={sessionData ? () => signOut() : () => signIn()}
+          >
+            {sessionData ? "Sign out" : "Sign in"}
+          </button>
+        </div>
+      )}
+    </>
+  );
 }
 // export async function getStaticPaths() {
 

@@ -6,7 +6,6 @@ import SendIcon from '@mui/icons-material/Send';
 import { useStore } from '../../store/store';
 import shallow from 'zustand/shallow';
 import Buttons from './buttons';
-import { setComment } from '../../utils/api-helpers';
 import { Message } from '../../utils/interfaces';
 import ConvHeader from './sections/convHeader/convHeader';
 import ConvFooter from './sections/convFooter/convFooter';
@@ -60,17 +59,17 @@ export default function RightColumn({ conversation, onClose }: ConversationsProp
       text: mes,
       answered_to_id: selectedMessage?._id,
       from_email: activeConversation.email,
-      from_id: activeConversation._id,
+      from_id: activeConversation.id,
       title: title,
       date: new Date(),
       to_email: activeUser.email,
-      to_id: activeUser._id
+      to_id: activeUser.id
     };
     if (mes) {
-      const message = await setComment(msg);
-      if (message) {
-        setMessage(message, conversation);
-      }
+      // const message = await setComment(msg);
+      // if (message) {
+      //   setMessage(message, conversation);
+      // }
     }
   }
   useEffect(() => {

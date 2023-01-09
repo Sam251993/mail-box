@@ -4,7 +4,7 @@ import { Typography } from '@mui/material';
 import styles from './convBody.module.scss';
 import { useStore } from '../../../../store/store';
 import shallow from 'zustand/shallow';
-import { Message } from '../../utils/interfaces';
+import { Comment } from '@prisma/client';
 
 // --- Component Props Interface ---
 type ConversationsProps = Partial<{
@@ -26,7 +26,7 @@ export default function ConvBody({ conversation }: ConversationsProps): JSX.Elem
     shallow
   );
 
-  const [selectedMessage, setSelectedMessage] = useState<Message>();  
+  const [selectedMessage, setSelectedMessage] = useState<Comment>();  
   const containerRef = useRef<HTMLDivElement>(null);
   const lastMessage = (index: number) => {
     const container = containerRef.current;
@@ -34,8 +34,8 @@ export default function ConvBody({ conversation }: ConversationsProps): JSX.Elem
       [...container.children][index]?.scrollIntoView();
     }
   }
-  const selectMessage = (msg: Message) => {
-    if(msg._id === selectedMessage?._id) {
+  const selectMessage = (msg: Comment) => {
+    if(msg.id === selectedMessage?.id) {
       setSelectedMessage(undefined);
     } else {
       setSelectedMessage(msg);
@@ -49,9 +49,9 @@ export default function ConvBody({ conversation }: ConversationsProps): JSX.Elem
     <div ref={containerRef} style={{ overflowY: 'auto', margin: '15px' }}>
       {
         messages.map((msg, i) => (
-          <div key={msg._id} className={`
+          <div key={msg.id} className={`
               ${styles['message-border']}
-              ${msg._id === selectedMessage?._id ? styles['message-active'] : ''}
+              ${msg.id === selectedMessage?.id ? styles['message-active'] : ''}
             `}
           onClick={() => selectMessage(msg)}
           >

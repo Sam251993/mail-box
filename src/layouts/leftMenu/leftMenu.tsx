@@ -20,7 +20,7 @@ import Drawer  from '@mui/material/Drawer';
 import RightColumn from '../rightColumn/rightColumn';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 
-export default function LeftMenu(props: any) {
+export default function LeftMenu() {
   const [selectedMenu, setSelectedMenu] = React.useState<number>();
   const [open, setOpen] = useState<boolean>(false);
   const resetConversation = useStore(
@@ -41,12 +41,11 @@ export default function LeftMenu(props: any) {
   };
 
   const refreshPage = () => {
-    window.location.reload();
+    window.location.replace('/');
   } 
 
   return (
-    <div className="leftMenu" >
-      {/* <Link href={`/inbox`}>test</Link> */}
+    <div className="leftMenu">
       <div>
         <div>
           <MenuList>

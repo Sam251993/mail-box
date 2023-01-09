@@ -92,12 +92,13 @@ enum TaskStatus {
 model Comment {
     id                  String      @id @default(cuid()) @map("_id")
     email               String      
+    from_id             String
     from_email          String
     to_id               String  
     to_email            String
     title               String
     text                String
     date                DateTime
-    answered_to_id      String      
+    answered_to_id      String?    
     conversation_id     String?  
 }
