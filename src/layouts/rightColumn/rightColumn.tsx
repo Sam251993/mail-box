@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useRef } from 'react';
-import { Button, Paper, TextField, Box, Typography } from '@mui/material';
-import styles from './rightColumn.module.scss';
-import SendIcon from '@mui/icons-material/Send';
+import { useRef } from 'react'; 
+import styles from './rightColumn.module.scss'; 
 import { useStore } from '../../store/store';
-import shallow from 'zustand/shallow';
-import Buttons from './buttons';
+import shallow from 'zustand/shallow'; 
 import { Message } from '../../utils/interfaces';
 import ConvHeader from './sections/convHeader/convHeader';
 import ConvFooter from './sections/convFooter/convFooter';

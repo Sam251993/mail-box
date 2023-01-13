@@ -1,7 +1,6 @@
 import React from 'react';
 import { IconButton, OutlinedInput, InputAdornment } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
-import styles from './centerMenu.module.scss';
+import SearchIcon from '@mui/icons-material/Search'; 
 import shallow from 'zustand/shallow';
 import { useStore } from '../../store/store';
 import ConversationCard from './conversationCard/conversationCard';
@@ -32,9 +31,9 @@ export default function LeftColumn() {
 
   return (
 
-    <div className={styles['column']}>
-      <div className={styles['search']}>
-        <div>
+    <div >
+      <div className=' bg-white border-b-2 h-[86px]'>
+        <div className=' p-[15px]'>
           <OutlinedInput
             sx={{ width: '100%', background: '#f3f4f8' }}
             id="outlined-adornment-password"
@@ -50,7 +49,7 @@ export default function LeftColumn() {
           />
         </div>
       </div>
-      <div className={styles['column']} style={{ overflowY: 'auto', height: 'calc(100vh - 86px)' }}> <h2>Today</h2>
+      <div style={{ overflowY: 'auto', height: 'calc(100vh - 86px)' }}> <h2 className="bold-text pl-[50px] text-[20px]">Today</h2>
         {
           users.map((user) => (
             <div key={user.id}>

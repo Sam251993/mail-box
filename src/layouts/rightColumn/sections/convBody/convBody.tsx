@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRef } from 'react';
 import { Typography } from '@mui/material';
-import styles from './convBody.module.scss';
 import { useStore } from '../../../../store/store';
 import shallow from 'zustand/shallow';
 import { Comment } from '@prisma/client';
@@ -11,7 +10,7 @@ type ConversationsProps = Partial<{
   conversation: 'blankConversation'
 }>;
 
-export default function ConvBody({ conversation }: ConversationsProps): JSX.Element  {
+export default function ConvBody({ conversation }: ConversationsProps): JSX.Element {
   const { messages, count } = useStore(
     (currentStore) => {
       const store = conversation ? currentStore[conversation] : currentStore;
@@ -26,7 +25,7 @@ export default function ConvBody({ conversation }: ConversationsProps): JSX.Elem
     shallow
   );
 
-  const [selectedMessage, setSelectedMessage] = useState<Comment>();  
+  const [selectedMessage, setSelectedMessage] = useState<Comment>();
   const containerRef = useRef<HTMLDivElement>(null);
   const lastMessage = (index: number) => {
     const container = containerRef.current;
@@ -35,13 +34,13 @@ export default function ConvBody({ conversation }: ConversationsProps): JSX.Elem
     }
   }
   const selectMessage = (msg: Comment) => {
-    if(msg.id === selectedMessage?.id) {
+    if (msg.id === selectedMessage?.id) {
       setSelectedMessage(undefined);
     } else {
       setSelectedMessage(msg);
     }
   }
- 
+
   useEffect(() => {
     lastMessage(count - 1);
   }, [count]);
@@ -49,23 +48,25 @@ export default function ConvBody({ conversation }: ConversationsProps): JSX.Elem
     <div ref={containerRef} style={{ overflowY: 'auto', margin: '15px' }}>
       {
         messages.map((msg, i) => (
-          <div key={msg.id} className={`
-              ${styles['message-border']}
-              ${msg.id === selectedMessage?.id ? styles['message-active'] : ''}
+          <div
+            key={msg.id}
+            className={`
+              border-b
+              ${msg.id === selectedMessage?.id ? 'bg-yellow-100' : ''}
             `}
-          onClick={() => selectMessage(msg)}
+            onClick={() => selectMessage(msg)}
           >
-            <div className={styles['userame-style']} >
+            <div className={'p-1.5 text-gray-600'} >
               <b>
                 <div>
                   <div>{msg.from_email}</div>
                 </div>
               </b>
             </div>
-            <Typography className={styles['message']} gutterBottom variant="h3" component="div" >
-              <div>{msg.text}</div>
+            <Typography className={'px-7 m-0 text-base text-gray-600'} gutterBottom variant="h3" component="div" >
+              <div className="text-[20px] ">{msg.text}</div>
             </Typography>
-            <Typography className={styles['message']} gutterBottom variant="overline" component="div" sx={{ textAlign: 'right' }} >
+            <Typography className={'px-7 m-0 text-base text-gray-600'} gutterBottom variant="overline" component="div" sx={{ textAlign: 'right' }} >
               {msg.date.toLocaleString()}
             </Typography>
           </div>)

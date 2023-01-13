@@ -3,8 +3,7 @@ import shallow from 'zustand/shallow';
 import { useStore } from '../../store/store';
 import LeftColumn from '../centerMenu/centerMenu';
 import CenterMenu from '../leftMenu/leftMenu';
-import RightColumn from '../rightColumn/rightColumn';
-import styles from './grid.module.scss';
+import RightColumn from '../rightColumn/rightColumn'; 
 
 
 
@@ -18,14 +17,14 @@ export default function MainGrid() {
     resetConversation();
   }
   return (
-      <Grid2 className={styles['msg-columns']} container rowSpacing={0}>
-        <Grid2 xs={2}>
+      <Grid2 container rowSpacing={0}>
+        <Grid2 xs={2}  className='border'>
           <CenterMenu />
-        </Grid2>
-        <Grid2 className={styles.conversations} xs={4}>
+        </Grid2 >
+        <Grid2 className=' bg-slate-100 border-1' xs={4} >
             <LeftColumn/>
         </Grid2>
-        <Grid2 xs={6}>
+        <Grid2 className='border-l' xs={6}>
           <RightColumn onClose={close} />
         </Grid2>
       </Grid2>

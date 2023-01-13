@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRef } from 'react';
-import { Button, Paper, TextField } from '@mui/material';
-import styles from './convFooter.module.scss';
+import { Button, Paper, TextField } from '@mui/material'; 
 import SendIcon from '@mui/icons-material/Send';
 import { useStore } from '../../../../store/store';
 import shallow from 'zustand/shallow';
@@ -69,8 +68,8 @@ export default function ConvFooter({ conversation }: ConversationsProps): JSX.El
     lastMessage(count - 1);
   }, [count]);
   return (
-    <Paper elevation={1} className={styles['quick-reply']}>
-      <div className={styles['text-field']}>
+    <Paper elevation={1} className=' gap-4 h-72 p-4 m-4'>
+      <div className='w-full'>
         <TextField
           sx={{ width: '100%' }}
           label="Title:"

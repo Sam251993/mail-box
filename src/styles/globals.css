@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    h2 {
+        font-family: 'Times New Roman', Times, serif;
+        @apply font-bold my-2
+        
+    } 
+    h3 {
+        font-size: 18.72px;
+        @apply font-bold
+    }
+    .mailbox {
+        font-family: 'Times New Roman', Times, serif;
+    }
+}

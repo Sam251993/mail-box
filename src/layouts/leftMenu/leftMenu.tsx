@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { AccordionSummary, Accordion, AccordionDetails, Typography, Divider, MenuList, MenuItem, ListItemText, ListItemIcon, Button } from '@mui/material';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import GroupIcon from '@mui/icons-material/Group';
@@ -12,7 +12,6 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import SendIcon from '@mui/icons-material/Send';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
-import styles from './leftMenu.module.scss';
 import { useStore } from '../../store/store';
 import shallow from "zustand/shallow";
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
@@ -45,13 +44,13 @@ export default function LeftMenu() {
   } 
 
   return (
-    <div className="leftMenu">
+    <div>
       <div>
         <div>
           <MenuList>
-            <div className={styles['logo-container']}>
-              <div onClick={refreshPage}><MailOutlineIcon sx={{verticalAlign: 'top', height: '20px'}}/> QQ Mailbox</div>
-              <div>
+            <div>
+              <div onClick={refreshPage} className="p-2 cursor-pointer justify-center flex"><MailOutlineIcon sx={{verticalAlign: 'top', height: '20px'}} /> QQ Mailbox</div>
+              <div className=' justify-center flex'>
                 <Button variant="contained" onClick={ () => setOpen(true)}>Send</Button>
               </div>
             </div>
