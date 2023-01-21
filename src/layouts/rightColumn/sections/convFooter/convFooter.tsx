@@ -88,11 +88,11 @@ export default function ConvFooter({ conversation }: ConversationsProps): JSX.El
           value={mes}
         />
         {
-          selectedMessage &&
+          selectedMessage ?
           <>
             <span>{selectedMessage.from_email} {selectedMessage.date.toLocaleString()} wrote:</span>
             <span>{selectedMessage.text}</span> 
-          </>
+          </> : null
         }
       </div>
       <Button

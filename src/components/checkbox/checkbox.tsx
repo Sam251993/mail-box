@@ -1,5 +1,4 @@
-import React, { useState } from "react"; 
-import { string } from "zod";
+import React, { useState } from "react";  
 import "./styles.css";
 
 export default function App() {
@@ -30,7 +29,7 @@ export default function App() {
     : "";
 
   // Return classes based on whether item is checked
-  var isChecked = (item:string) =>
+  let isChecked = (item:string) =>
     checked.includes(item) ? "checked-item" : "not-checked-item";
 
   return (
