@@ -1,7 +1,7 @@
 import MonthPicker from "./monthPicker";
 
 export default {
-    title: "month",
+    title: "Month",
     component: MonthPicker
 }
 

@@ -1,8 +1,8 @@
 import DatePicker from "./datePicker";
 
 export default {
-    title: "date",
+    title: "Date",
     component: DatePicker
 }
 
-export const tabs = () => <DatePicker />
+export const Date = () => <DatePicker options={{ }} locale={'ru-Ru'} />

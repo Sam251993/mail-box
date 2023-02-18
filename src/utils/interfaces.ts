@@ -22,3 +22,10 @@ export interface Conversations {
     title: string,
     date: Date
 }
+
+export enum View {
+    Month = "Month",
+    Year = "Year",
+    Hour = "Hour",
+    Minute = 'Minute'
+}
